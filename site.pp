@@ -21,7 +21,7 @@ node 'puppettest' {                                                         # Co
     provider => git,
     source   => 'https://github.com/tomreeb/v5',
   }
-  class { '::apache': }                                                     # use apache module
+  class { '::apache': }                                                     # use apache module, install, and start it
   apache::vhost { 'tomreeb.com':                                            # define vhost resource
     port    => '80',
     docroot => '/var/www/html'

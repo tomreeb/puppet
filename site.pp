@@ -9,12 +9,12 @@ node default {                                                              # ap
     class { 'linux': }
 }       
 
-node 'wiki' {                                                              # applies to nodes that aren't explicitly defined
+node 'wiki' {                                                               # applies to nodes that aren't explicitly defined
     class { 'linux': }
     class { 'mediawiki': }
 }
 
-node 'puppettest' {
+node 'puppettest' {                                                         # Could be regex for web01-09 by: 'node /^web0[1-9]+/ {'      
   class { 'linux': }                                                        # Call Class
   vcsrepo { '/var/www/html':
     ensure   => present,

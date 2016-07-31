@@ -5,9 +5,10 @@
 #    content => "Only DNS servers get this file.\n",
 #  }
 #}
+node default {}       # applies to nodes that aren't explicitly defined
 
 node 'puppettest' {
-  class { 'linux': }
+  class { 'linux': }                # Call Class
   package { 'git':
   ensure => installed,
   }
@@ -23,9 +24,9 @@ node 'puppettest' {
   }
 }
 
-node default {}       # applies to nodes that aren't explicitly defined
-
 class linux {
+
+    $optpkgs = ['git', 'nano', 'tmux', 'htop', 'ntp']           # Variables
 
     $ntpservice = $osfamily ? {
       'redhat' => 'ntpd',
@@ -33,7 +34,7 @@ class linux {
       default  => 'ntpd',
     }
 
-    package { 'ntp':
+    package { $optpkgs:
       ensure => 'installed',
     }
 

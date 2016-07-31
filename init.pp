@@ -13,4 +13,10 @@ class mediawiki {
         ensure => 'present',
         }
   }
+
+  class { '::apache':                                                      # use apache module, install, and start it
+    docroot => '/var/www/html'
+    mpm_module => 'present',
+    subscribe => Package[$phpmysql],
+  }
 }

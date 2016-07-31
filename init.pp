@@ -19,4 +19,6 @@ class mediawiki {
     mpm_module => 'present',
     subscribe => Package[$phpmysql],
   }
+
+  class { '::apache::mod::php':}
 }

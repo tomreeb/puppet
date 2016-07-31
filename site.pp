@@ -5,17 +5,24 @@
 #    content => "Only DNS servers get this file.\n",
 #  }
 #}
-node default {}       # applies to nodes that aren't explicitly defined
+node default {                                                              # applies to nodes that aren't explicitly defined
+    class { 'linux': }
+}       
+
+node 'wiki' {                                                              # applies to nodes that aren't explicitly defined
+    class { 'linux': }
+    class { 'mediawiki': }
+}
 
 node 'puppettest' {
-  class { 'linux': }                # Call Class
+  class { 'linux': }                                                        # Call Class
   vcsrepo { '/var/www/html':
     ensure   => present,
     provider => git,
     source   => 'https://github.com/tomreeb/v5',
   }
-  class { 'apache': }             # use apache module
-  apache::vhost { 'tomreeb.com':  # define vhost resource
+  class { 'apache': }                                                       # use apache module
+  apache::vhost { 'tomreeb.com':                                            # define vhost resource
     port    => '80',
     docroot => '/var/www/html'
   }
@@ -23,7 +30,7 @@ node 'puppettest' {
 
 class linux {
 
-    $optpkgs = ['git', 'nano', 'tmux', 'htop', 'ntp', 'screen']           # Variables
+    $optpkgs = ['git', 'nano', 'tmux', 'htop', 'ntp', 'screen']             # Variables
 
     $ntpservice = $osfamily ? {
       'redhat' => 'ntpd',
@@ -40,9 +47,9 @@ class linux {
       enable => true,
     }
 
-    file {'/tmp/example-ip':                                            # resource type file and filename
-      ensure  => present,                                               # make sure it exists
-      mode    => '0644',                                                # file permissions
-      content => "Here is my IP Address: ${ipaddress_eno16777984}.\n",  # note the ipaddress_eth0 fact
+    file {'/tmp/example-ip':                                                # resource type file and filename
+      ensure  => present,                                                   # make sure it exists
+      mode    => '0644',                                                    # file permissions
+      content => "Here is my IP Address: ${ipaddress_eno16777984}.\n",      # note the ipaddress_eth0 fact
     }
 }

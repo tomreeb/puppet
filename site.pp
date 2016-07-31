@@ -1,18 +1,13 @@
-file {'/tmp/example-ip':                                            # resource type file and filename
-  ensure  => present,                                               # make sure it exists
-  mode    => '0644',                                                # file permissions
-  content => "Here is my IP Address: ${ipaddress_eno16777984}.\n",  # note the ipaddress_eth0 fact
-}
-
-node 'ns1', 'ns2' {    # applies to ns1 and ns2 nodes
-  file {'/tmp/dns':    # resource type file and filename
-    ensure => present, # make sure it exists
-    mode => '0644',
-    content => "Only DNS servers get this file.\n",
-  }
-}
+#node 'ns1', 'ns2' {    # applies to ns1 and ns2 nodes
+#  file {'/tmp/dns':    # resource type file and filename
+#    ensure => present, # make sure it exists
+#    mode => '0644',
+#    content => "Only DNS servers get this file.\n",
+#  }
+#}
 
 node 'puppettest' {
+  class { 'linux': }
   package { 'git':
   ensure => installed,
   }
@@ -29,3 +24,27 @@ node 'puppettest' {
 }
 
 node default {}       # applies to nodes that aren't explicitly defined
+
+class linux {
+
+    $ntpservice = $osfamily ? {
+      'redhat' => 'ntpd',
+      'debian' => 'ntp',
+      default  => 'ntpd',
+    }
+
+    package { 'ntp':
+      ensure => 'installed',
+    }
+
+    service { $ntpservice:
+      ensure => 'running',
+      enable => true,
+    }
+
+    file {'/tmp/example-ip':                                            # resource type file and filename
+      ensure  => present,                                               # make sure it exists
+      mode    => '0644',                                                # file permissions
+      content => "Here is my IP Address: ${ipaddress_eno16777984}.\n",  # note the ipaddress_eth0 fact
+    }
+}

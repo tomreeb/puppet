@@ -23,7 +23,7 @@ node 'puppettest' {
 
 class linux {
 
-    $optpkgs = ['git', 'nano', 'tmux', 'htop', 'ntp']           # Variables
+    $optpkgs = ['git', 'nano', 'tmux', 'htop', 'ntp', 'screen']           # Variables
 
     $ntpservice = $osfamily ? {
       'redhat' => 'ntpd',

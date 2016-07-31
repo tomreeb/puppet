@@ -9,9 +9,6 @@ node default {}       # applies to nodes that aren't explicitly defined
 
 node 'puppettest' {
   class { 'linux': }                # Call Class
-  package { 'git':
-  ensure => installed,
-  }
   vcsrepo { '/var/www/html':
     ensure   => present,
     provider => git,

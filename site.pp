@@ -13,10 +13,13 @@ node 'ns1', 'ns2' {    # applies to ns1 and ns2 nodes
 }
 
 node 'puppettest' {
+  package { 'git':
+  ensure => installed,
+  }
   vcsrepo { '/var/www/html':
-  ensure   => present,
-  provider => git,
-  source   => 'https://github.com/tomreeb/v5',
+    ensure   => present,
+    provider => git,
+    source   => 'https://github.com/tomreeb/v5',
   }
   class { 'apache': }             # use apache module
   apache::vhost { 'tomreeb.com':  # define vhost resource

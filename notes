@@ -1,0 +1,7 @@
+/etc/puppet/puppet.conf
+  set [main] runinterval to X seconds
+  enable and start the agent service
+
+For Ubuntu:
+/etc/default/puppet
+  START=yes

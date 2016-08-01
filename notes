@@ -5,3 +5,5 @@
 For Ubuntu:
 /etc/default/puppet
   START=yes
+
+So basically, if you are a Mediawiki server, you'll hit nodes.pp and see the hiera assigns your classes. Go to Hiera/wiki.yaml and see the classes and some variables are there; you'll also get the wikidefault.yaml variables. After that, you'll end up in the mediawiki module and get the rest of the stuff from the init.pp manifest.

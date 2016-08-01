@@ -1,5 +1,5 @@
 node default {                                                              # applies to nodes that aren't explicitly defined
-  heira_include('classes')                                                  # Heira will load Linux and Mediawiki classes
+  class { 'linux': }                                                  # Heira will load Linux and Mediawiki classes
 }
 
 node 'wiki' {

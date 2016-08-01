@@ -5,16 +5,6 @@
 #    content => "Only DNS servers get this file.\n",
 #  }
 #}
-node default {                                                              # applies to nodes that aren't explicitly defined
-  heira_include('classes')                                                  # Heira will load Linux and Mediawiki classes
-}
-
-node 'wiki' {
-  #$wikisitename = 'wiki'                                                   # Removed to put into hiera
-  heira_include('classes')
-  #class { 'linux': }
-  #class { 'mediawiki': }
-}
 
 node 'puppettest' {                                                         # Could be regex for web01-09 by: 'node /^web0[1-9]+/ {'
   class { 'linux': }                                                        # Call Class

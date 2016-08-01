@@ -1,0 +1,7 @@
+:backends:
+  - yaml
+:yaml:
+  :datadir:                                   # Default datadir: /var/lib/hiera
+:hierarchy:
+  - "%{clientcert}"
+  - wikidefault

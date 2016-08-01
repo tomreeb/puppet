@@ -7,14 +7,23 @@
 #}
 node default {                                                              # applies to nodes that aren't explicitly defined
     class { 'linux': }
-}       
-
-node 'wiki' {                                                               # applies to nodes that aren't explicitly defined
-    class { 'linux': }
-    class { 'mediawiki': }
 }
 
-node 'puppettest' {                                                         # Could be regex for web01-09 by: 'node /^web0[1-9]+/ {'      
+node 'wiki' {
+  $wikisitename = 'wiki'
+  $wikimetanamespace = 'Wiki'
+  $wikiserver = "http://172.31.0.202"
+  $wikidbserver = 'localhost'
+  $wikidbname = 'wiki'
+  $wikidbuser = 'root'
+  $wikidbpassword = 'training'
+  $wikiupgradekey = 'puppet'
+  
+  class { 'linux': }
+  class { 'mediawiki': }
+}
+
+node 'puppettest' {                                                         # Could be regex for web01-09 by: 'node /^web0[1-9]+/ {'
   class { 'linux': }                                                        # Call Class
   vcsrepo { '/var/www/html':
     ensure   => present,

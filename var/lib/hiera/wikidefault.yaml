@@ -1,0 +1,8 @@
+---
+classes:
+  - mediawiki
+  - linux
+mediawiki::wikidbserver: localhost
+mediawiki::wikidbuser: root
+mediawiki::wikidbpassword: training
+mediawiki::wikiupgradekey: puppet

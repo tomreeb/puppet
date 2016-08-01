@@ -5,6 +5,8 @@
 #    content => "Only DNS servers get this file.\n",
 #  }
 #}
+node default {                                                              # applies to nodes that aren't explicitly defined
+  class { 'linux': } 
 
 node 'puppettest' {                                                         # Could be regex for web01-09 by: 'node /^web0[1-9]+/ {'
   class { 'linux': }                                                        # Call Class
